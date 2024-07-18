@@ -123,6 +123,12 @@ ul {
   margin: 0% 1%;
 }
 
+.vibe-chart {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
