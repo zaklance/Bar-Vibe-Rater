@@ -17,11 +17,11 @@ function Vibes() {
             datasets: [{
                 label: "Big Bar",
                 backgroundColor: "rgba(200,0,0,0.2)",
-                data: [4, 2, 4, 2, 3, 1]
+                data: [4, 4, 5, 2, 4, 1]
             }, {
                 label: "Tile Bar",
                 backgroundColor: "rgba(0,0,200,0.2)",
-                data: [4, 1, 2, 3, 4, 1]
+                data: [4, 2, 3, 3, 5, 1]
             }]
         };
         
@@ -31,7 +31,7 @@ function Vibes() {
             options: {
                 scales: {
                     r: {
-                        max: 5,
+                        max: 7,
                         min: 0,
                         ticks: {
                             display: false,
