@@ -26,12 +26,7 @@ class User(db.Model, SerializerMixin):
     _password = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
 
-    # Relationships
-    ratings = db.relationship('Rating', back_populates='users')
-    favorites = db.relationship('Favorite', back_populates='users')
-
-    serialize_rules = ('-ratings.user_id')
-    serialize_rules = ('-favorites.user_id')
+    serialize_rules = ('-ratings.users', '-favorites.users')
 
     @validates('username')
     def validate_username(self, key, value):
@@ -72,30 +67,25 @@ class Bar(db.Model, SerializerMixin):
     latitude = db.Column(db.Double, nullable=False)
     longitude = db.Column(db.Double, nullable=False)
 
-    # Relationships
-    ratings = db.relationship('Rating', back_populates='bars')
-    favorites = db.relationship('Favorite', back_populates='bars')
-
-    serialize_rules = ('-ratings.bar_id')
-    serialize_rules = ('-favorites.bar_id')
+    # ratings = db.relationship('Rating', back_populates='bar_name')
 
     def __repr__(self) -> str:
         return f"<Bar {self.bar_name}>"
+
 
 class Rating(db.Model, SerializerMixin):
     __tablename__ = 'ratings'
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.JSON, nullable=False)
 
+    # bar_name = db.relationship('Bar', back_populates='ratings')
+
     bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    # Relationships
-    bars = db.relationship('Bar', back_populates='ratings')
-    users = db.relationship('User', back_populates='ratings')
-
     def __repr__(self) -> str:
         return f"<Rating {self.rating}>"
+
 
 class Favorite(db.Model, SerializerMixin):
     __tablename__ = 'favorites'
@@ -103,6 +93,3 @@ class Favorite(db.Model, SerializerMixin):
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'))
-
-    users = db.relationship('User', back_populates='favorites')
-    bars = db.relationship('Bar', back_populates='favorites')
