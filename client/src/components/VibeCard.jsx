@@ -1,7 +1,7 @@
 import React from "react";
 import Chart from 'chart.js/auto';
 import { useEffect } from "react";
-import '../index.css';
+// import '../index.css';
 
 function VibeCard({ barData }) {
 

@@ -8,7 +8,7 @@ import SignUp from './components/SignUp.jsx'
 import Vibes from './components/Vibes.jsx'
 import Rater from './components/Rater.jsx'
 import Favorites from './components/Favorites.jsx'
-import './index.css';
+// import './index.css';
 
 
 const router = createBrowserRouter([

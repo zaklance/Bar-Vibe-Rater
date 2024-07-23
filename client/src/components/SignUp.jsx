@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import '../index.css';
+// import '../index.css';
 import barLogo from '../assets/bar-vibe-rater-logo.png'
 
 function SignUp() {

@@ -63,7 +63,7 @@ def run():
     for i in range(800):
         bar_id = randint(1, 200)
         user_id = randint(1, 100)
-        rating = [randint(1,7) for i in range(6)]
+        rating = [randint(1,7) for i in range(7)]
 
         r = Rating(
             bar_id=bar_id,

@@ -1,9 +1,8 @@
 import React from "react";
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
-import Chart from 'chart.js/auto';
 import { useEffect, useState } from "react";
-import '../index.css';
+import Chart from 'chart.js/auto';
 import VibeCard from "./VibeCard";
+import MapCard from './MapCard';
 
 function Vibes() {
     // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
@@ -69,7 +68,7 @@ function Vibes() {
         const barData = {
             labels: ["Theme", "Atmosphere", "Libations", "Group Size", "Volume", "Food"],
             datasets: [{
-                label: `Bar ${bar_id}`,
+                label: ``,
                 backgroundColor: "rgba(200,0,0,0.2)",
                 data: averages[bar_id]
             }]
@@ -88,81 +87,20 @@ function Vibes() {
                             stepSize: 1
                         }
                     }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
                 }
             }
         });
     }
-
-    // console.log(calculateAverageRatings(testData))
-    
-
-    // Example usage
-    // const data = [
-    //     { bar_id: 1, rating: [1, 2, 3] },
-    //     { bar_id: 1, rating: [4, 5, 6] },
-    //     { bar_id: 1, rating: [7, 8, 9] },
-    //     { bar_id: 2, rating: [3, 2, 1] },
-    //     { bar_id: 2, rating: [6, 5, 4] },
-    //     { bar_id: 2, rating: [9, 8, 7] }
-    // ];
-
-
-
-    // useEffect(() => {
-    //     const ctx = document.getElementById(bars.id);
-        
-
-    //     const barData = {
-    //         labels: ["Theme", "Atmosphere", "Libations", "Group Size", "Volume", "Food"],
-    //         datasets: [{
-    //             label: "Big Bar",
-    //             backgroundColor: "rgba(200,0,0,0.2)",
-    //             data: {}
-    //         },
-    //         // {
-    //         //     label: "Tile Bar",
-    //         //     backgroundColor: "rgba(0,0,200,0.2)",
-    //         //     data: [4, 2, 3, 3, 5, 1]
-    //         // }
-    //         ]
-    //     };
-        
-    //     const radarChart = new Chart(ctx, {
-    //         type: 'radar',
-    //         data: barData,
-    //         options: {
-    //             scales: {
-    //                 r: {
-    //                     max: 7,
-    //                     min: 0,
-    //                     ticks: {
-    //                         display: false,
-    //                         stepSize: 1
-    //                     },
-    //                     grid: {
-                            
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     });
-    // }, [])
-
-    const tompkins = { lat: 40.72606737678102, lng: -73.98333751481684 }
     
     return (
         <>
-                <div id='map'>
-                    <APIProvider apiKey={import.meta.env.VITE_GOOGLE_KEY} onLoad={() => console.log('Maps API has loaded.')}>
-                        <Map defaultCenter={tompkins} defaultZoom={13} map-id="4cdb05ac35ed1b8" disableDefaultUI={true}>
-                            {/* <Marker position={tompkins} /> */}
-                        </Map>
-                    </APIProvider>
-                    <gmp-map defaultCenter={tompkins} zoom={13} map-id="DEMO_MAP_ID">
-                        <gmp-advanced-marker position={tompkins} title="Union Square"></gmp-advanced-marker>
-                    </gmp-map>
-                </div>
-                <h2>Test</h2>
+                <MapCard />
+                <h2>Vibes</h2>
                 <div className="vibe-chart-container">
                     {bars.map((barData) => (
                         <VibeCard key={barData.id} barData={barData} />
