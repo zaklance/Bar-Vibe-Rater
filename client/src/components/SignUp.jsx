@@ -1,12 +1,35 @@
 import React from "react";
 import { useState } from "react";
-// import '../index.css';
+import { NavLink } from "react-router-dom";
+import '../index.css';
 import barLogo from '../assets/bar-vibe-rater-logo.png'
 
 function SignUp() {
     const [signupEmail, setSignupEmail] = useState('');
     const [signupUsername, setSignupUsername] = useState('');
     const [signupPassword, setSignupPassword] = useState('');
+
+    const handleSignup = async (event) => {
+        event.preventDefault();
+        const response = await fetch('http://127.0.0.1:5555/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: signupUsername,
+                password: signupPassword,
+                email: signupEmail,
+            }),
+            credentials: 'include'
+        });
+        if (response.ok) {
+            const data = await response.json();
+            alert("Sign Up Successful. Please log in!");
+        } else {
+            console.log('Signup failed');
+        }
+    };
 
     return (
         <>
@@ -37,7 +60,7 @@ function SignUp() {
                         required
                     />
                 </form>
-                <button className="btn login-btn" type='submit'>Signup</button>
+                <button className="btn login-btn" type='submit'><NavLink reloadDocument to={'/'}>Signup</NavLink></button>
             </div>
         </>
     )

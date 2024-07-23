@@ -72,11 +72,26 @@ def all_users():
         return jsonify([user.to_dict() for user in users]), 200
 
 
-@app.route('/ratings', methods=['GET'])
-def all_vibes():
+@app.route('/ratings', methods=['GET', 'POST'])
+def all_ratings():
     if request.method == 'GET':
         ratings = Rating.query.all()
         return jsonify([rating.to_dict() for rating in ratings]), 200
+    elif request.method == 'POST':
+        data = request.get_json()
+        try:
+            new_rating = Rating(
+                rating=data.get('rating'),
+                bar_id=data.get('bar_id'),
+                user_id=data.get('user_id'),
+                # bar_name=data.get('bar_name')
+            )
+        except ValueError:
+            return {'error': 'validation failed'}, 400
+        db.session.add(new_rating)
+        db.session.commit()
+
+        return new_rating.to_dict(), 201
 
 
 @app.route('/favorites', methods=['GET'])

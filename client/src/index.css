@@ -33,7 +33,7 @@ body {
 }
 
 .container {
-  width: 80vw;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -45,6 +45,17 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+.h-bold {
+  font-weight: 900; 
+}
+
+.h-med {
+  font-weight: 700;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .flavor-text {
@@ -78,6 +89,9 @@ ul {
   font-weight: 500;
   color: #6c7ae0;
   transition: .2s;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 .nav-btn:hover {
   background-color: #f9f4a4;
@@ -94,6 +108,10 @@ ul {
   background-color: white;
   cursor: pointer;
   transition: border-color 0.25s;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
 }
 .btn:hover {
   background-color: #f9f4a4;
@@ -108,6 +126,22 @@ ul {
   width: 60%;
   margin-left: calc(40% / 2);
   margin-bottom: 16px;
+}
+
+button {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+}
+
+.btn:active {
+  transform: scale(0.98);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+input {
+  padding: 8px;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .card {
@@ -137,13 +171,21 @@ Map {
 .vibe-chart-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.vibe-card {
+  width: 250px;
 }
 
 .vibe-card h4 {
-  margin-top: -12px;
+  margin-top: -18px;
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
+  
 }
 
 .slider-header {

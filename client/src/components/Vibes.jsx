@@ -66,9 +66,9 @@ function Vibes() {
         const ctx = document.getElementById(`${bar_id}`);
 
         const barData = {
-            labels: ["Theme", "Atmosphere", "Libations", "Group Size", "Volume", "Food"],
+            labels: ["Theme", "Atmosphere", "Libations", "Group Size", "Volume", "Food", 'Lighting'],
             datasets: [{
-                label: ``,
+                label: `Bar`,
                 backgroundColor: "rgba(200,0,0,0.2)",
                 data: averages[bar_id]
             }]
@@ -99,14 +99,15 @@ function Vibes() {
     
     return (
         <>
-                <MapCard />
-                <h2>Vibes</h2>
-                <div className="vibe-chart-container">
-                    {bars.map((barData) => (
-                        <VibeCard key={barData.id} barData={barData} />
-                    ))}
-                </div>
-            </>
+            {}
+            <MapCard />
+            <h1 className="h-bold">Vibes</h1>
+            <div className="vibe-chart-container">
+                {bars.map((barData) => (
+                    <VibeCard key={barData.id} barData={barData} />
+                ))}
+            </div>
+        </>
         )
     }
 

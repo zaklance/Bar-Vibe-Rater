@@ -8,7 +8,7 @@ function VibeCard({ barData }) {
     return (
         <div className="vibe-card">
             <canvas id={barData.id}></canvas>
-            <h4>{barData.bar_name}</h4>
+            <h4 className="h-med">{barData.bar_name}</h4>
         </div>
     )
 }

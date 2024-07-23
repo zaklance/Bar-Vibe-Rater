@@ -67,9 +67,9 @@ class Bar(db.Model, SerializerMixin):
     latitude = db.Column(db.Double, nullable=False)
     longitude = db.Column(db.Double, nullable=False)
 
-    ratings = db.relationship('Rating', back_populates='bar_name')
+    ratings = db.relationship('Rating', back_populates='bar')
 
-    serialize_rules = ('-ratings.bar_name',)
+    serialize_rules = ('-ratings.bar',)
 
     def __repr__(self) -> str:
         return f"<Bar {self.bar_name}>"
@@ -83,9 +83,9 @@ class Rating(db.Model, SerializerMixin):
     bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    bar_name = db.relationship('Bar', back_populates='ratings')
+    bar = db.relationship('Bar', back_populates='ratings')
 
-    # serialize_rules = ('-bar_name.ratings',)
+    serialize_rules = ('-bar.ratings',)
 
     def __repr__(self) -> str:
         return f"<Rating {self.rating}>"

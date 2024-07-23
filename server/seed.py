@@ -60,7 +60,7 @@ def run():
 
     # add fake Ratings
     ratings = []
-    for i in range(800):
+    for i in range(1000):
         bar_id = randint(1, 200)
         user_id = randint(1, 100)
         rating = [randint(1,7) for i in range(7)]

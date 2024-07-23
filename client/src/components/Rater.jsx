@@ -90,23 +90,30 @@ function Rater() {
     
     const onUpdateQuery = event => setQuery(event.target.value);
     const filteredBars = bars.filter(bar => bar.bar_name.toLowerCase().includes(query.toLowerCase()) && bar.bar_name !== query)
+    const matchingBar = bars.find(bar => bar.bar_name.toLowerCase() === query.toLowerCase());
+    const matchingBarId = matchingBar ? matchingBar.id : null;
 
+    // console.log(sliderVibeList)
+    // console.log(matchingBar.bar_name)
+    // console.log(matchingBarId)
+    // console.log(globalThis.localStorage.getItem('user_id'))
 
     function handleSubmit(event) {
         event.preventDefault();
-    //     fetch("http://localhost:3000/111", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             rating: sliderVibeList,
-    //             bar_id: ,
-    //             user_id: 
-    //         })
-    //     }).then(response => response.json())
-    //         .then(newDirective111Data => setDirective111Data([...directive111Data, newDirective111Data]));
+        fetch("http://localhost:5555/ratings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                rating: sliderVibeList,
+                bar_id: matchingBarId,
+                user_id: globalThis.localStorage.getItem('user_id'),
+                // bar_name: matchingBar.bar_name
+            })
+        }).then(response => response.json())
+            .then(console.log('Successful Vibe Rating'));
     }
 
     return (
