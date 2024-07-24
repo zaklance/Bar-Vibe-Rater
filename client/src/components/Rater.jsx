@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Slider from '@mui/material/Slider';
+import Chart from 'chart.js/auto';
 import { light } from "@mui/material/styles/createPalette";
 // import '../index.css';
 
 function Rater() {
+    const chartRef = useRef();
 
     const theme = {
         1: 'Sports bar',
@@ -97,6 +99,52 @@ function Rater() {
     // console.log(matchingBar.bar_name)
     // console.log(matchingBarId)
     // console.log(globalThis.localStorage.getItem('user_id'))
+
+    useEffect(() => {
+        const ctx = document.getElementById(`chart-rater`);
+
+        if (chartRef.current) {
+            chartRef.current.destroy();
+        }
+
+        const barData = {
+            labels: ["Theme", "Atmosphere", "Libations", "Group Size", "Volume", "Food", 'Lighting'],
+            datasets: [{
+                label: `Bar`,
+                backgroundColor: "rgba(200,0,0,0.2)",
+                data: sliderVibeList
+            }]
+        };
+
+        chartRef.current = new Chart(ctx, {
+            type: 'radar',
+            data: barData,
+            options: {
+                scales: {
+                    r: {
+                        max: 7,
+                        min: 0,
+                        ticks: {
+                            display: false,
+                            stepSize: 1
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        return () => {
+            if (chartRef.current) {
+                chartRef.current.destroy();
+            }
+        };
+    }, [sliderVibeList]);
+
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -244,6 +292,9 @@ function Rater() {
                 />
                 <input className="btn" id="submit" type="submit" value="Submit Vibe" />
             </form>
+            <div>
+                <canvas id="chart-rater"></canvas>
+            </div>
         </div>
     )
 }
