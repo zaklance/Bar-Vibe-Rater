@@ -50,7 +50,7 @@ class User(db.Model, SerializerMixin):
 
     @password.setter
     def password(self, new_password):
-        hash = bcrypt.generate_password_hash(new_password.encode('utf-8'))
+        hash = bcrypt.generate_password_hash(new_password.encode('utf-8')).decode('utf-8')
         self._password = hash
 
     def authenticate(self, password):
@@ -68,8 +68,9 @@ class Bar(db.Model, SerializerMixin):
     longitude = db.Column(db.Double, nullable=False)
 
     ratings = db.relationship('Rating', back_populates='bar')
+    favorites = db.relationship('Favorite', back_populates='bar')
 
-    serialize_rules = ('-ratings.bar',)
+    serialize_rules = ('-ratings.bar', '-favorites.bar')
 
     def __repr__(self) -> str:
         return f"<Bar {self.bar_name}>"
@@ -97,3 +98,7 @@ class Favorite(db.Model, SerializerMixin):
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'))
+
+    bar = db.relationship('Bar', back_populates='favorites')
+
+    serialize_rules = ('-bar.favorites',)

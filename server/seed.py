@@ -18,20 +18,29 @@ def run():
     for i in range(100):
         username = fake.user_name()
         password = fake.password()
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        # hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         email = fake.ascii_free_email()
         # favorite_markets = str([randint(1, 40) for _ in range(randint(2, 4))])
         # favorite_vendors = str([randint(1, 150) for _ in range(randint(3, 9))])
 
         u = User(
             username=username,
-            password=hashed_password,
+            password=password,
             email=email,
         )
         users.append(u)
 
+        zl = User(
+            username="zlance",
+            password="123",
+            email="nowayman@proton.me"
+        )
+
     db.session.add_all(users)
+    db.session.add(zl)
     db.session.commit()
+
+
 
     # add fake Bars
     word_list = fake.get_words_list()
@@ -78,8 +87,8 @@ def run():
 
     # add fake Favorites
     favs = []
-    for i in range(250):
-        user_id=randint(1, 100)
+    for i in range(400):
+        user_id=randint(1, 101)
         bar_id=randint(1, 200)
 
         f = Favorite(

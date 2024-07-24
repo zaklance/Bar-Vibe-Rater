@@ -6,6 +6,7 @@ import MapCard from './MapCard';
 function Vibes() {
     const [bars, setBars] = useState([]);
     const [ratings, setRatings] = useState([]);
+    const [favs, setFavs] = useState([]);
     const chartRefs = useRef({});
 
     useEffect(() => {
@@ -21,6 +22,17 @@ function Vibes() {
             .then(data => setRatings(data))
             .catch(error => console.error('Error fetching ratings', error));
     }, []);
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:5555/favorites")
+            .then(response => response.json())
+            .then(data => {
+                const filteredData = data.filter(item => item.user_id === parseInt(globalThis.localStorage.getItem('user_id')));
+                setFavs(filteredData)
+            })
+            .catch(error => console.error('Error fetching favorites', error));
+    }, []);
+
 
     function calculateAverageRatings(data) {
         const barMap = {};
@@ -106,12 +118,12 @@ function Vibes() {
             <h1 className="h-bold">Vibes</h1>
             <div className="vibe-chart-container">
                 {bars.map((barData) => (
-                    <VibeCard key={barData.id} barData={barData} />
+                    <VibeCard key={barData.id} barData={barData} favs={favs} />
                 ))}
             </div>
-            {Object.keys(averages).map(bar_id => (
+            {/* {Object.keys(averages).map(bar_id => (
                 <canvas id={`chart-${bar_id}`} key={bar_id}></canvas>
-            ))}
+            ))} */}
         </>
     );
 }

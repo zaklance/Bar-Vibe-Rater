@@ -8,24 +8,32 @@ function NavBar() {
         <nav>
             <ul className="nav-bar">
                 <li>
-                    <button className="nav-btn">
-                        <NavLink reloadDocument to='/vibes'>vibes</NavLink>
-                    </button>
+                    <NavLink reloadDocument to='/vibes'>
+                        <button className="nav-btn">
+                            vibes
+                        </button>
+                    </NavLink>
                 </li>
                 <li>
-                    <button className="nav-btn">
-                        <NavLink reloadDocument to='/rater'>rater</NavLink>
-                    </button>
+                    <NavLink reloadDocument to='/rater'>
+                        <button className="nav-btn">
+                            rater
+                        </button>
+                    </NavLink>
                 </li>
                 <li>
-                    <button className="nav-btn">
-                        <NavLink reloadDocument to='/favorites'>favs</NavLink>
-                    </button>
+                    <NavLink reloadDocument to='/favorites'>
+                        <button className="nav-btn">
+                            favs
+                        </button>
+                    </NavLink>
                 </li>
                 <li>
-                    <button className="nav-btn">
-                        <NavLink reloadDocument to={`/vibes/`}>random</NavLink>
-                    </button>
+                    <NavLink reloadDocument to={`/vibes/`}>
+                        <button className="nav-btn">
+                            random
+                        </button>
+                    </NavLink>
                 </li>
             </ul>
         </nav>
