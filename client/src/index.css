@@ -238,6 +238,10 @@ Map {
   padding: 0;
 }
 
+.slider-text {
+  margin-top: -10px;
+}
+
 .slider-header {
   margin-bottom: -10px;
 }

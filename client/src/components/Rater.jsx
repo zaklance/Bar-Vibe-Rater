@@ -6,7 +6,10 @@ import { light } from "@mui/material/styles/createPalette";
 
 function Rater() {
     const chartRef = useRef();
-
+    const [bars, setBars] = useState([]);
+    const [query, setQuery] = useState("");
+    const [ sliderVibeList, setSliderVibeList ] = useState([4, 4, 4, 4, 4, 4, 4]);
+    
     const theme = {
         1: 'Sports bar',
         2: 'Pool and/or other bar games',
@@ -71,12 +74,7 @@ function Rater() {
         7: 'I can see everything, bring sunnies 😎'
     }
 
-    const [ sliderVibeList, setSliderVibeList ] = useState([4, 4, 4, 4, 4, 4, 4]);
-    const getIndex = (i) =>sliderVibeList[i]
-
-
-    const [bars, setBars] = useState([]);
-    const [query, setQuery] = useState("");
+    // const getIndex = (i) =>sliderVibeList[i]
 
     const handleSliderChange = (index, newValue) => {
         const newValues = [...sliderVibeList];
@@ -94,11 +92,6 @@ function Rater() {
     const filteredBars = bars.filter(bar => bar.bar_name.toLowerCase().includes(query.toLowerCase()) && bar.bar_name !== query)
     const matchingBar = bars.find(bar => bar.bar_name.toLowerCase() === query.toLowerCase());
     const matchingBarId = matchingBar ? matchingBar.id : null;
-
-    // console.log(sliderVibeList)
-    // console.log(matchingBar.bar_name)
-    // console.log(matchingBarId)
-    // console.log(globalThis.localStorage.getItem('user_id'))
 
     useEffect(() => {
         const ctx = document.getElementById(`chart-rater`);
@@ -166,6 +159,9 @@ function Rater() {
 
     return (
         <div>
+            <div>
+                <canvas id="chart-rater"></canvas>
+            </div>
             <h1>Vibe Rater</h1>
             {/* <h2>Bar Name</h2> */}
             <input className="search-bar" type="text" placeholder="Search bar names..." value={query} onChange={onUpdateQuery} />
@@ -178,7 +174,7 @@ function Rater() {
                 }
             </div>
             <form onSubmit={handleSubmit}>
-                <div className="flex">
+                <div className="flex slider-text">
                     <h2 className="slider-header">Theme:</h2>
                     <h2 className="flavor-text" >{theme[sliderVibeList[0]]}</h2>
                 </div>
@@ -194,7 +190,7 @@ function Rater() {
                     value={sliderVibeList[0]}
                     onChange={(e, value) => handleSliderChange(0, value)}
                 />
-                <div className="flex">
+                <div className="flex slider-text">
                     <h2 className="slider-header">Atmosphere:</h2>
                     <h2 className="flavor-text" >{atmosphere[sliderVibeList[1]]}</h2>
                 </div>
@@ -210,7 +206,7 @@ function Rater() {
                     value={sliderVibeList[1]}
                     onChange={(e, value) => handleSliderChange(1, value)}
                 />
-                <div className="flex">
+                <div className="flex slider-text">
                     <h2 className="slider-header">Libations: </h2>
                     <h2 className="flavor-text" >{libations[sliderVibeList[2]]}</h2>
                 </div>
@@ -226,7 +222,7 @@ function Rater() {
                     value={sliderVibeList[2]}
                     onChange={(e, value) => handleSliderChange(2, value)}
                     />
-                <div className="flex">
+                <div className="flex slider-text">
                     <h2 className="slider-header">Party Size:</h2>
                     <h2 className="flavor-text" >{partySize[sliderVibeList[3]]}</h2>
                 </div>
@@ -242,7 +238,7 @@ function Rater() {
                     value={sliderVibeList[3]}
                     onChange={(e, value) => handleSliderChange(3, value)}
                     />
-                <div className="flex">
+                <div className="flex slider-text">
                     <h2 className="slider-header">Volume:</h2>
                     <h2 className="flavor-text" >{volume[sliderVibeList[4]]}</h2>
                 </div>
@@ -258,7 +254,7 @@ function Rater() {
                     value={sliderVibeList[4]}
                     onChange={(e, value) => handleSliderChange(4, value)}
                     />
-                <div className="flex">
+                <div className="flex slider-text">
                     <h2 className="slider-header">Food:</h2>
                     <h2 className="flavor-text" >{food[sliderVibeList[5]]}</h2>
                 </div>
@@ -274,7 +270,7 @@ function Rater() {
                     value={sliderVibeList[5]}
                     onChange={(e, value) => handleSliderChange(5, value)}
                     />
-                <div className="flex">
+                <div className="flex slider-text">
                     <h2 className="slider-header">Lighting:</h2>
                     <h2 className="flavor-text" >{lighting[sliderVibeList[6]]}</h2>
                 </div>
@@ -292,9 +288,6 @@ function Rater() {
                 />
                 <input className="btn" id="submit" type="submit" value="Submit Vibe" />
             </form>
-            <div>
-                <canvas id="chart-rater"></canvas>
-            </div>
         </div>
     )
 }
