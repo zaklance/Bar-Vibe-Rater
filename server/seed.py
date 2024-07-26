@@ -87,7 +87,7 @@ def run():
     # add fake Favorites
     favs = []
     for i in range(400):
-        user_id=randint(1, 101)
+        user_id=randint(1, 100)
         bar_id=randint(1, 200)
 
         f = Favorite(

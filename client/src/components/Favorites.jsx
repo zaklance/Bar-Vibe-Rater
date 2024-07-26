@@ -15,6 +15,7 @@ function Favorites() {
     //         .catch(error => console.error('Error fetching bars', error));
     // }, []);
 
+    
     useEffect(() => {
         fetch("http://127.0.0.1:5555/favorites")
             .then(response => response.json())
@@ -113,7 +114,7 @@ function Favorites() {
             <h1 className="h-bold">Favorites</h1>
             <div className="vibe-chart-container">
                 {favs.map((barData) => (
-                    <VibeCard key={barData.id} barData={barData.bar} favs={favs} />
+                    <VibeCard key={barData.id} barData={barData.bar} favs={favs} setFavs={setFavs} />
                 ))}
             </div>
         </>

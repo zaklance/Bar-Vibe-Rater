@@ -6,6 +6,7 @@ function VibeCard({ barData, favs, setFavs }) {
     const [isClicked, setIsClicked] = useState(false);
 
     useEffect(() => {
+
         // Any other initialization or effect code can go here if needed
     }, [barData]);    
 
@@ -28,13 +29,14 @@ function VibeCard({ barData, favs, setFavs }) {
                 setFavs([...favs, data])
             });
         } else {
-            const findFavId = favs.find(item => item.bar_id == barData.id)
-            fetch(`http://127.0.0.1:5555/favorites/${findFavId.id}`, {
-                method: "DELETE",
-            }).then(() => {
-                setFavs((favs) => favs.filter((fav) => fav.bar_id !== barData.id),
-        );
-            })
+            const findFavId = favs.filter(item => item.bar_id == barData.id)
+            for (const item of findFavId) {
+                fetch(`http://127.0.0.1:5555/favorites/${item.id}`, {
+                    method: "DELETE",
+                }).then(() => {
+                    setFavs((favs) => favs.filter((fav) => fav.bar_id !== barData.id));
+                })
+            }
         }
     };
 

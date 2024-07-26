@@ -39,7 +39,7 @@ function App() {
         <NavBar />
       </header>
       <main className='container'>
-        <Outlet ratings={ratings} />
+        <Outlet ratings={ratings} favs={favs} setFavs={setFavs} />
       </main>
     </>
   )
