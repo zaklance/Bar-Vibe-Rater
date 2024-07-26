@@ -2,27 +2,43 @@ import React, { useEffect, useState } from "react";
 import Chart from 'chart.js/auto';
 import '../index.css';
 
-function VibeCard({ barData, favs }) {
+function VibeCard({ barData, favs, setFavs }) {
     const [isClicked, setIsClicked] = useState(false);
 
     useEffect(() => {
-        
         // Any other initialization or effect code can go here if needed
-    }, [barData]);
+    }, [barData]);    
 
-    const isFav = favs.some(fav => fav.bar_id === barData.id);
-
-    const handleClick = () => {
+    const handleClick = async (event) => {
         setIsClicked(!isClicked);
-        if (isClicked == true) {
-            console.log(isClicked)
+        if (isClicked == false) {
+            const response = await fetch('http://127.0.0.1:5555/favorites', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: globalThis.localStorage.getItem('user_id'),
+                    bar_id: barData.id
+                })
+                // credentials: 'include'
+            }).then((resp) => {
+                return resp.json()
+            }).then(data => {
+                setFavs([...favs, data])
+            });
         } else {
-            console.log(isClicked)
+            const findFavId = favs.find(item => item.bar_id == barData.id)
+            fetch(`http://127.0.0.1:5555/favorites/${findFavId.id}`, {
+                method: "DELETE",
+            }).then(() => {
+                setFavs((favs) => favs.filter((fav) => fav.bar_id !== barData.id),
+        );
+            })
         }
-
     };
-    
-    // console.log(isFav)
+
+    let isFav = favs.some(fav => fav.bar_id === barData.id);
 
     return (
         <div className="vibe-card">

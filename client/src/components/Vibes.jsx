@@ -33,6 +33,27 @@ function Vibes() {
             .catch(error => console.error('Error fetching favorites', error));
     }, []);
 
+    // function handleSubmit(event) {
+    //     if ()
+    //     event.preventDefault();
+    //     fetch("http://localhost:5555/ratings", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Accept": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             rating: sliderVibeList,
+    //             bar_id: matchingBarId,
+    //             user_id: globalThis.sessionStorage.getItem('user_id'),
+    //         })
+    //     }).then(response => response.json())
+    //         .then(console.log('Successful Vibe Rating'));
+    // }
+
+
+
+
 
     function calculateAverageRatings(data) {
         const barMap = {};
@@ -114,11 +135,11 @@ function Vibes() {
 
     return (
         <>
-            <MapCard />
+            <MapCard bars={bars} />
             <h1 className="h-bold">Vibes</h1>
             <div className="vibe-chart-container">
                 {bars.map((barData) => (
-                    <VibeCard key={barData.id} barData={barData} favs={favs} />
+                    <VibeCard key={barData.id} barData={barData} favs={favs} setFavs={setFavs} />
                 ))}
             </div>
             {/* {Object.keys(averages).map(bar_id => (

@@ -110,7 +110,7 @@ function Favorites() {
     
     return (
         <>
-            <h1 className="h-bold">Vibes</h1>
+            <h1 className="h-bold">Favorites</h1>
             <div className="vibe-chart-container">
                 {favs.map((barData) => (
                     <VibeCard key={barData.id} barData={barData.bar} favs={favs} />

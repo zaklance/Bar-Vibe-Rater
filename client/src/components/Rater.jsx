@@ -150,8 +150,7 @@ function Rater() {
             body: JSON.stringify({
                 rating: sliderVibeList,
                 bar_id: matchingBarId,
-                user_id: globalThis.localStorage.getItem('user_id'),
-                // bar_name: matchingBar.bar_name
+                user_id: globalThis.sessionStorage.getItem('user_id'),
             })
         }).then(response => response.json())
             .then(console.log('Successful Vibe Rating'));

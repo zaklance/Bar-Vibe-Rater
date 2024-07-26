@@ -2,6 +2,7 @@ from app import app
 from faker import Faker
 from random import random, choice, randint, uniform
 from models import db, User, Bar, Rating, Favorite, bcrypt
+import json
 
 fake = Faker()
 
@@ -53,13 +54,11 @@ def run():
     bars = []
     for i in range(200):
         bar_name = choice([f'{choice(word_list).title()} {choice(bar_noun)}', f'{choice(word_list).title()} {choice(bar_noun)}', f'{choice(word_list).title()} {choice(bar_noun)}', f'{choice(word_list).title()} {choice(bar_noun)}', f'{choice(word_list).title()} {randint(0, 100)}', f'{fake.color_name().title()} {choice(word_list).title()} {choice(bar_noun)}', f'{fake.color_name().title()} {choice(bar_noun)}', f"{fake.first_name()}'s {choice(bar_noun)}"])
-        lat = uniform(lat_low, lat_up)
-        lon = uniform(lon_right, lon_left)
+        location = {f"lat": f"{uniform(lat_low, lat_up)}", f"lng": f"{uniform(lon_right, lon_left)}"}
 
         b = Bar(
             bar_name=bar_name,
-            latitude=lat,
-            longitude=lon
+            location=location
         )
         bars.append(b)
 

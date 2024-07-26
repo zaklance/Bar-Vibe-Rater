@@ -6,6 +6,7 @@ from sqlalchemy_serializer import SerializerMixin
 from flask_bcrypt import Bcrypt
 
 
+
 convention = {
     "ix": "ix_%(column_0_label)s",
     "uq": "uq_%(table_name)s_%(column_0_name)s",
@@ -64,8 +65,8 @@ class Bar(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     bar_name = db.Column(db.String, nullable=False)
     image = db.Column(db.String)
-    latitude = db.Column(db.Double, nullable=False)
-    longitude = db.Column(db.Double, nullable=False)
+    location = db.Column(db.JSON, nullable=False)
+    # longitude = db.Column(db.Double, nullable=False)
 
     ratings = db.relationship('Rating', back_populates='bar')
     favorites = db.relationship('Favorite', back_populates='bar')
@@ -81,8 +82,8 @@ class Rating(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.JSON, nullable=False)
 
-    bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     bar = db.relationship('Bar', back_populates='ratings')
 

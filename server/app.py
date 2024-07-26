@@ -94,11 +94,31 @@ def all_ratings():
         return new_rating.to_dict(), 201
 
 
-@app.route('/favorites', methods=['GET'])
+@app.route('/favorites', methods=['GET', 'POST'])
 def all_favs():
     if request.method == 'GET':
         favs = Favorite.query.all()
         return jsonify([fav.to_dict() for fav in favs]), 200
+    
+    elif request.method == 'POST':
+        data = request.get_json()
+        new_favorite = Favorite(
+            user_id=data['user_id'],
+            bar_id=data['bar_id']
+        )
+        db.session.add(new_favorite)
+        db.session.commit()
+        return new_favorite.to_dict(), 201
+
+@app.route('/favorites/<int:id>', methods=['GET', 'DELETE'])
+def del_fav(id):
+    fav = Favorite.query.filter(Favorite.id == id).first()
+    if request.method == 'GET':
+        return fav.to_dict(), 200
+    if request.method == 'DELETE':
+        db.session.delete(fav)
+        db.session.commit()
+        return {}, 204
 
 
 if __name__ == '__main__':

@@ -1,29 +1,29 @@
 import React from "react";
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { APIProvider, Map, Marker, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
 // import { Map, Marker } from 'mapkit-react'
 
-function MapCard() {
+function MapCard({ bars }) {
     const tompkins = { lat: 40.72606737678102, lng: -73.98333751481684 }
 
     return (
         <div id='map'>
-            {/* <Map token={import.meta.env.VITE_MAPKIT_KEY_ALT}>
-                    <Marker
-                        key={market.id}
-                        latitude={market.latitude}
-                        longitude={market.longitude}
-                        title={market.name}
-                    />
-            </Map> */}
-
             <APIProvider apiKey={import.meta.env.VITE_GOOGLE_KEY} onLoad={() => console.log('Maps API has loaded.')}>
                 <Map
                     defaultCenter={{ lat: 40.72606737678102, lng: -73.98333751481684 }}
-                    defaultZoom={13}
-                    map-id="4cdb05ac35ed1b8"
+                    defaultZoom={15}
+                    map-id='{import.meta.env.VITE_GOOGLE_MAP_ID}'
                     disableDefaultUI={true}
                     >
-                    <Marker position={tompkins} />
+                    {bars.map((barData) => (
+                        <Marker key={barData.id} position={{'lat': parseFloat(barData.location.lat), 'lng': parseFloat(barData.location.lng)}} />
+                    ))}
+                    {/* <AdvancedMarker position={tompkins}>
+                        <Pin
+                            background={'#0f9d58'}
+                            borderColor={'#006425'}
+                            glyphColor={'#60d98f'}
+                        />
+                    </AdvancedMarker> */}
                 </Map>
             </APIProvider>
         </div>
