@@ -7,24 +7,17 @@ import Home from './components/Home.jsx';
 
 
 function App() {
-  // const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+  const [ ratings, setRatings ] = useState([]);
 
-  // const checkAuth = () => {
-  //   return localStorage.getItem('authToken') !== null;
-  // }
+  const checkAuth = () => {
+    return sessionStorage.getItem('authToken') !== null;
+  }
 
-  // useEffect(() => {
-  //   setIsLoggedIn(checkAuth());
-  // }, []);
+  useEffect(() => {
+    setIsLoggedIn(checkAuth());
+  }, []);
 
-//   {isLoggedIn ? 
-
-//   isLoggedIn = { isLoggedIn } setIsLoggedIn = { setIsLoggedIn }
-// {isLoggedIn ? 
-//   : <Home />}
-
-  const [ratings, setRatings] = useState([]);
-  const [favs, setFavs] = useState([]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:5555/ratings")
@@ -39,7 +32,11 @@ function App() {
         <NavBar />
       </header>
       <main className='container'>
-        <Outlet ratings={ratings} favs={favs} setFavs={setFavs} />
+        {isLoggedIn ? (
+          <Outlet ratings={ratings} />
+        ) : (
+          <Home />
+        )}
       </main>
     </>
   )

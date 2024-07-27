@@ -3,7 +3,7 @@ import barLogo from '../assets/bar-vibe-rater-logo.png'
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-function Home({ isLoggedIn, setIsLoggedIn }) {
+function Home() {
     const [loginUsername, setLoginUsername] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
 
@@ -21,22 +21,16 @@ function Home({ isLoggedIn, setIsLoggedIn }) {
         });
         if (response.ok) {
             const data = await response.json();
-            globalThis.localStorage.setItem('authToken', 'is logged in');
-            globalThis.localStorage.setItem('user_id', data.id);
-            console.log('Login successful:', data);
+            globalThis.sessionStorage.setItem('authToken', 'is logged in');
+            globalThis.sessionStorage.setItem('user_id', data.id);
+            console.log('Login successful:', data.username);
+            alert('Login successful!')
             navigate('/vibes');
+            window.location.reload();
         } else {
             alert('Login failed');
         }
     };
-
-    // const checkAuth = () => {
-    //     return localStorage.getItem('authToken') !== null;
-    // }
-
-    // useEffect(() => {
-    //     setIsLoggedIn(checkAuth());
-    // })
 
 
     return (
