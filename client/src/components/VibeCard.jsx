@@ -11,7 +11,7 @@ function VibeCard({ barData, favs, setFavs }) {
     }, [barData]);    
 
     const handleClick = async (event) => {
-        setIsClicked(!isClicked);
+        setIsClicked((isClick) => !isClick);
         if (isClicked == false) {
             const response = await fetch('http://127.0.0.1:5555/favorites', {
                 method: 'POST',
@@ -41,6 +41,10 @@ function VibeCard({ barData, favs, setFavs }) {
     };
 
     let isFav = favs.some(fav => fav.bar_id === barData.id);
+    
+    useEffect(() => {
+        setIsClicked(isFav)
+    }, [handleClick])
 
     return (
         <div className="vibe-card">
