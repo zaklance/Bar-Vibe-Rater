@@ -140,15 +140,12 @@ function Search() {
     function filterAverages(averages, sliderValues) {
         const filteredAverages = {};
         for (const bar_id in averages) {
-            filteredAverages[bar_id] = averages[bar_id].filter((value, index) => {
-                return sliderValues[index] > 0 && Math.abs(value - sliderValues[index]) <= 0.5;
+            const isWithinRange = averages[bar_id].every((value, index) => {
+                return sliderValues[index] === 0 || Math.abs(value - sliderValues[index]) <= 0.5;
             });
 
-            // Only include the bar if there is at least one filtered value
-            if (filteredAverages[bar_id].length > 0) {
+            if (isWithinRange) {
                 filteredAverages[bar_id] = averages[bar_id];
-            } else {
-                delete filteredAverages[bar_id];
             }
         }
         return filteredAverages;
