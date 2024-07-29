@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
-// import '../index.css';
+import '../index.css';
 
-function NavBar() {
+function NavBar({ bars }) {
+    const randomBar = Math.floor(Math.random() * (Math.floor(bars.length) - Math.ceil(1))) + Math.ceil(1);
 
     return (
         <nav>
@@ -28,10 +29,17 @@ function NavBar() {
                         </button>
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink reloadDocument to={`/vibes/`}>
+                {/* <li>
+                    <NavLink reloadDocument to={`/bars/${randomBar}`}>
                         <button className="nav-btn">
                             random
+                        </button>
+                    </NavLink>
+                </li> */}
+                <li>
+                    <NavLink reloadDocument to={`/search`}>
+                        <button className="nav-btn">
+                            search
                         </button>
                     </NavLink>
                 </li>

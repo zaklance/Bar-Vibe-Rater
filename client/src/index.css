@@ -193,6 +193,11 @@ input {
   font-style: normal;
 }
 
+.select-small {
+  min-width: 120px;
+  background-color: white;
+}
+
 .card {
   width: fit-content;
   margin-top: 20%;
@@ -214,6 +219,14 @@ Map {
   height: 40vh;
   margin-left: auto;
   margin-right: auto;
+}
+
+#chart-rater {
+  justify-content: center;
+  margin-top: -20px;
+  margin-bottom: -50px;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .vibe-chart-container {
@@ -292,4 +305,16 @@ Map {
   width: 400px;
   margin-left: calc((100% - 400px) / 2);
   margin-right: calc((100% - 400px) / 2);
+}
+
+
+@media only screen and (max-width: 624px) {
+
+  .container {
+    width: 85%;
+  }
+
+  .vibe-card {
+    width: 50%;
+  }
 }

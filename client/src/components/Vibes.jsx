@@ -1,37 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useOutletContext } from "react-router-dom";
 import Chart from 'chart.js/auto';
 import VibeCard from "./VibeCard";
 import MapCard from './MapCard';
 
 function Vibes() {
-    const [bars, setBars] = useState([]);
-    const [ratings, setRatings] = useState([]);
+    const [ bars, setBars, ratings, setRatings ] = useOutletContext();
     const [favs, setFavs] = useState([]);
     const chartRefs = useRef({});
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:5555/bars")
-            .then(response => response.json())
-            .then(data => setBars(data))
-            .catch(error => console.error('Error fetching bars', error));
-    }, []);
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:5555/ratings")
-            .then(response => response.json())
-            .then(data => setRatings(data))
-            .catch(error => console.error('Error fetching ratings', error));
-    }, []);
-
-    useEffect(() => {
-        fetch("http://127.0.0.1:5555/favorites")
-            .then(response => response.json())
-            .then(data => {
-                const filteredData = data.filter(item => item.user_id === parseInt(globalThis.localStorage.getItem('user_id')));
-                setFavs(filteredData)
-            })
-            .catch(error => console.error('Error fetching favorites', error));
-    }, []);
 
     // function handleSubmit(event) {
     //     if ()
@@ -51,6 +27,16 @@ function Vibes() {
     //         .then(console.log('Successful Vibe Rating'));
     // }
 
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:5555/favorites")
+            .then(response => response.json())
+            .then(data => {
+                const filteredData = data.filter(item => item.user_id === parseInt(globalThis.localStorage.getItem('user_id')));
+                setFavs(filteredData)
+            })
+            .catch(error => console.error('Error fetching favorites', error));
+    }, []);
 
 
 

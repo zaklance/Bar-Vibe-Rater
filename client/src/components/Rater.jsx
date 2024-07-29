@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Slider from '@mui/material/Slider';
 import Chart from 'chart.js/auto';
 import { light } from "@mui/material/styles/createPalette";
-// import '../index.css';
+import '../index.css';
 
 function Rater() {
     const chartRef = useRef();

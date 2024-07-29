@@ -65,6 +65,13 @@ def all_bars():
         return jsonify([bar.to_dict() for bar in bars]), 200
 
 
+@app.route('/bars/<int:id>', methods=['GET'])
+def get_bar(id):
+    bar = Bar.query.filter(Bar.id == id).first()
+    if request.method == 'GET':
+        return bar.to_dict(), 200
+
+
 @app.route('/users', methods=['GET'])
 def all_users():
     if request.method == 'GET':

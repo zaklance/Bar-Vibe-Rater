@@ -8,7 +8,8 @@ import SignUp from './components/SignUp.jsx'
 import Vibes from './components/Vibes.jsx'
 import Rater from './components/Rater.jsx'
 import Favorites from './components/Favorites.jsx'
-// import './index.css';
+import Search from './components/Search.jsx';
+import Random from './components/Random.jsx';
 
 
 const router = createBrowserRouter([
@@ -37,14 +38,18 @@ const router = createBrowserRouter([
         path: "rater",
         element: <Rater />
       },
-      {
-        path: "vibes/:id",
-        element: <Vibes />
-      },
+      // {
+      //   path: "bars/:id",
+      //   element: <Random />
+      // },
       {
         path: "favorites",
         element: <Favorites />
       },
+      {
+        path: "search",
+        element: <Search />
+      }
     ]
   }
 ]);

@@ -4,16 +4,8 @@ import Chart from 'chart.js/auto';
 import '../index.css';
 
 function Favorites() {
-    // const [ratings, setRatings] = useState([]);
     const [favs, setFavs] = useState([]);
     const chartRefs = useRef({});
-
-    // useEffect(() => {
-    //     fetch("http://127.0.0.1:5555/ratings")
-    //         .then(response => response.json())
-    //         .then(data => setRatings(data))
-    //         .catch(error => console.error('Error fetching bars', error));
-    // }, []);
 
     
     useEffect(() => {
