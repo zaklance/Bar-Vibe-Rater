@@ -279,7 +279,7 @@ Map {
   max-width: 600px;
   height: fit-content;
   background-color: #FFC08D;
-  padding: 40px 0;
+  padding: 40px 0px 40px 0;
   z-index: 1002;
   overflow: auto;
   border-radius: 80px 80px 0px 80px;

@@ -45,6 +45,7 @@ function VibeCard({ barData, favs, setFavs }) {
     
     useEffect(() => {
         setIsClicked(isFav)
+        console.log(window.scrollY)
     }, [handleClick])
 
     const handleExpand = () => {
@@ -63,7 +64,7 @@ function VibeCard({ barData, favs, setFavs }) {
                 >♥</button>
             </div>
         </div>
-        <div className={`popup ${isExpand ? 'popup-on' : ''}`}>
+        <div className={`popup ${isExpand ? 'popup-on' : ''}`} style={{top: window.scrollY}}>
             <img src={barData.image} className="bar-image" />
             <ul className="expand-ul" >
                 <li>
