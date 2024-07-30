@@ -15,7 +15,7 @@ function MapCard({ bars }) {
                     disableDefaultUI={true}
                     >
                     {bars.map((barData) => (
-                        <Marker key={barData.id} position={{'lat': parseFloat(barData.location.lat), 'lng': parseFloat(barData.location.lng)}} />
+                        <Marker key={barData.id} position={{'lat': parseFloat(barData.coordinates.lat), 'lng': parseFloat(barData.coordinates.lng)}} />
                     ))}
                     {/* <AdvancedMarker position={tompkins}>
                         <Pin

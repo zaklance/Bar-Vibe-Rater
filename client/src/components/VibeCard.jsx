@@ -63,19 +63,22 @@ function VibeCard({ barData, favs, setFavs }) {
                 >♥</button>
             </div>
         </div>
-        <div className={`vibe-card-expand ${isExpand ? 'expand-on' : ''}`}>
-            <img />
+        <div className={`popup ${isExpand ? 'popup-on' : ''}`}>
+            <img src={barData.image} className="bar-image" />
             <ul className="expand-ul" >
                 <li>
-                    <b>Theme:</b> Theme of Bar
+                    <b>Theme:</b> {barData.theme}
                 </li>
                 <li>
-                    <b>Location:</b> 18th St and 2nd Ave
+                    <b>Location:</b> {barData.location}
                 </li>
                 <li>
-                    <b>Hours:</b> SuMTW 5PM - 2AM, ThFSa 5PM - 4AM
+                    <b>Hours:</b> {barData.hours}
                 </li>
             </ul>
+            <div className="float-right">
+                <button className="btn x-btn" onClick={handleExpand}>X</button>
+            </div>
         </div>
         </>
     );

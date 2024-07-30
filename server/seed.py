@@ -50,7 +50,8 @@ def run():
     lat_low = 40.710186757786815
     lon_left = -74.00684649410894
     lon_right = -73.9757766891443
-    images = [
+    barThemes = ['Sports bar', 'Pool and/or other bar games', 'Themed, ex: Tiki', 'Local bar', 'Pub', 'Craft', 'Music']
+    barImages = [
         'https://assets3.thrillist.com/v1/image/3060915/792x528',
         'https://www.skouttravel.com/wp-content/uploads/2018/01/White-Horse-1.jpg',
         'https://img-us.didaudo.net/us-locations/US/000/000/295/the-19-best-bars-with-games-in-new-york-city.jpg',
@@ -72,58 +73,48 @@ def run():
         'https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_560,q_60,w_960/v1/clients/neworleans/NOTMC_7604_4b84b710-3613-4c6e-a125-941c43a2391f.jpg'
     ]
     streetsEW = [
-        'Broadway',
-        'Lafayette',
-        'Mott',
-        'Allen',
-        'Mercer',
-        'Eldridge',
-        'Orchard',
-        'Wooster',
-        'Bowery',
-        'Thompson',
-        'Ludlow',
-        'Essex',
-        '2nd',
-        '3rd',
-        '4th',
-        '5th',
-        '6th',
-        '7th',
-        '8th',
-        '9th',
-        '10th',
-        '11th',
-        '12th',
-        '13th',
-        '14th',
-        '15th',
-        '16th',
-        '17th',
-        '18th',
-        '19th',
-        '20th',
-        '21st',
-        '22nd',
-        '23rd',
-        '24th',
-        '25th',
-        '26th',
-        '27th',
-        '28th'
+        'Broadway St',
+        'Lafayette St',
+        'Mott St',
+        'Allen St',
+        'Mercer St',
+        'Eldridge St',
+        'Orchard St',
+        'Wooster St',
+        'Bowery St',
+        'Thompson St',
+        'Ludlow St',
+        'Essex St',
+        '2nd St',
+        '3rd St',
+        '4th St',
+        '5th St',
+        '6th St',
+        '7th St',
+        '8th St',
+        '9th St',
+        '10th St',
+        '11th St',
+        '12th St',
+        '13th St',
+        '14th St',
+        '15th St',
+        '16th St',
+        '17th St',
+        '18th St',
+        '19th St',
+        '20th St',
+        '21st St',
+        '22nd St',
+        '23rd St',
+        '24th St',
+        '25th St',
+        '26th St',
+        '27th St',
+        '28th St'
     ]
+
     streetsNS = [
-        'Spring St',
-        'St Marks St',
-        'Houston St',
-        'Hester St',
-        'Canal St',
-        'Grand St',
-        'Broome St',
-        'Bleecker St',
-        'Elizabeth St'
-    ]
-    avenue = [
         'Avenue D',
         'Avenue C',
         'Avenue B',
@@ -138,17 +129,34 @@ def run():
         'Seventh Ave',
         'Eighth Ave',
         'Ninth Ave',
-        'Tenth Ave'
+        'Tenth Ave',
+        'Spring St',
+        'St Marks St',
+        'Houston St',
+        'Hester St',
+        'Canal St',
+        'Grand St',
+        'Broome St',
+        'Bleecker St',
+        'Elizabeth St'
     ]
 
     bars = []
     for i in range(200):
         bar_name = choice([f'{choice(word_list).title()} {choice(bar_noun)}', f'{choice(word_list).title()} {choice(bar_noun)}', f'{choice(word_list).title()} {choice(bar_noun)}', f'{choice(word_list).title()} {choice(bar_noun)}', f'{choice(word_list).title()} {randint(0, 100)}', f'{fake.color_name().title()} {choice(word_list).title()} {choice(bar_noun)}', f'{fake.color_name().title()} {choice(bar_noun)}', f"{fake.first_name()}'s {choice(bar_noun)}"])
-        location = {f"lat": f"{uniform(lat_low, lat_up)}", f"lng": f"{uniform(lon_right, lon_left)}"}
+        image = choice(barImages)
+        coordinates = {f"lat": f"{uniform(lat_low, lat_up)}", f"lng": f"{uniform(lon_right, lon_left)}"}
+        theme = choice(barThemes)
+        location = choice([f'{choice(streetsEW)} and {choice(streetsNS)}', f'{choice(streetsEW)} between {choice(streetsNS)} and {choice(streetsNS)}', f'{choice(streetsNS)} between {choice(streetsEW)} and {choice(streetsEW)}'])
+        hours = f'Sun-Wed 5PM - {choice([12, 1, 2])}AM, Thu-Sat 5PM - {choice([2, 3, 4])}AM' 
 
         b = Bar(
             bar_name=bar_name,
-            location=location
+            image=image,
+            coordinates=coordinates,
+            theme=theme,
+            location=location,
+            hours=hours
         )
         bars.append(b)
 
@@ -159,14 +167,19 @@ def run():
     # add fake Ratings
     ratings = []
     for i in range(1000):
+        rev_len = randint(1, 5)
+
         bar_id = randint(1, 200)
         user_id = randint(1, 100)
         rating = [randint(1,7) for i in range(7)]
+        review = str(fake.paragraph(nb_sentences=rev_len))
+
 
         r = Rating(
             bar_id=bar_id,
             user_id=user_id,
-            rating=rating
+            rating=rating,
+            review=review
         )
         ratings.append(r)
     

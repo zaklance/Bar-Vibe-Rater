@@ -65,7 +65,10 @@ class Bar(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     bar_name = db.Column(db.String, nullable=False)
     image = db.Column(db.String)
-    location = db.Column(db.JSON, nullable=False)
+    coordinates = db.Column(db.JSON, nullable=False)
+    theme = db.Column(db.String)
+    location = db.Column(db.String)
+    hours = db.Column(db.String)
 
     ratings = db.relationship('Rating', back_populates='bar')
     favorites = db.relationship('Favorite', back_populates='bar')
@@ -80,6 +83,7 @@ class Rating(db.Model, SerializerMixin):
     __tablename__ = 'ratings'
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.JSON, nullable=False)
+    review = db.Column(db.String)
 
     bar_id = db.Column(db.Integer, db.ForeignKey('bars.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
