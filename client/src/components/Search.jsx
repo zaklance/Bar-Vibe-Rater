@@ -154,7 +154,6 @@ function Search() {
     const filteredAverages = filterAverages(averages, sliderVibeList);
     const filteredBars = bars.filter(bar => filteredAverages[bar.id]);
 
-    console.log(filteredAverages)
 
     useEffect(() => {
         Object.keys(averages).forEach(bar_id => {
@@ -200,7 +199,6 @@ function Search() {
         });
     }, [averages]);
     
-    console.log(filteredAverages)
 
     return (
         <>

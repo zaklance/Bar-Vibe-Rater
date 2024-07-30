@@ -66,7 +66,6 @@ class Bar(db.Model, SerializerMixin):
     bar_name = db.Column(db.String, nullable=False)
     image = db.Column(db.String)
     location = db.Column(db.JSON, nullable=False)
-    # longitude = db.Column(db.Double, nullable=False)
 
     ratings = db.relationship('Rating', back_populates='bar')
     favorites = db.relationship('Favorite', back_populates='bar')

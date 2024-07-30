@@ -3,7 +3,8 @@ import Chart from 'chart.js/auto';
 import '../index.css';
 
 function VibeCard({ barData, favs, setFavs }) {
-    const [isClicked, setIsClicked] = useState(false);
+    const [ isClicked, setIsClicked ] = useState(false);
+    const [ isExpand, setIsExpand ] = useState(false)
 
     useEffect(() => {
 
@@ -46,17 +47,37 @@ function VibeCard({ barData, favs, setFavs }) {
         setIsClicked(isFav)
     }, [handleClick])
 
+    const handleExpand = () => {
+        setIsExpand(!isExpand);
+    }
+
     return (
+        <>
         <div className="vibe-card">
             <canvas id={`chart-${barData.id}`}></canvas>
             <div className="flex center">
-                <h4 className="h-med">{barData.bar_name}</h4>
+                    <a className="a-expand" onClick={handleExpand} ><h4 className="h-med">{barData.bar_name}</h4></a>
                 <button
                     className={`h-med btn fav-btn ${isClicked || isFav ? 'btn-on' : ''}`}
                     onClick={handleClick}
                 >♥</button>
             </div>
         </div>
+        <div className={`vibe-card-expand ${isExpand ? 'expand-on' : ''}`}>
+            <img />
+            <ul className="expand-ul" >
+                <li>
+                    <b>Theme:</b> Theme of Bar
+                </li>
+                <li>
+                    <b>Location:</b> 18th St and 2nd Ave
+                </li>
+                <li>
+                    <b>Hours:</b> SuMTW 5PM - 2AM, ThFSa 5PM - 4AM
+                </li>
+            </ul>
+        </div>
+        </>
     );
 }
 

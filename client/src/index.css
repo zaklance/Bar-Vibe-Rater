@@ -252,6 +252,15 @@ Map {
   padding: 0;
 }
 
+.vibe-card-expand {
+  display: none;
+  width: 50%;
+}
+
+.expand-on {
+  display: block;
+}
+
 .slider-text {
   margin-top: -10px;
 }
