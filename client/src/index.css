@@ -290,6 +290,39 @@ Map {
   display: block;
 }
 
+.bar-image, .expand-ul, .review-box {
+  margin-right: 40px;
+}
+
+.expand-ul {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.bar-image {
+  width: 86%;
+  /* max-width: 600px; */
+  margin-left: 40px;
+  margin-right: 40px;
+  border-radius: 40px;
+}
+
+.review-box {
+  overflow-y: auto;
+  max-height: 120px;
+  margin-top: -12px;
+  margin-bottom: -20px;
+}
+
+.review-box li {
+  background-color: wheat;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  padding: 2px 4px;
+}
+
 /* .vibe-card-expand {
   display: none;
   width: 50%;
@@ -300,20 +333,6 @@ Map {
 .expand-on {
   display: block;
 } */
-
-.expand-ul {
-  font-family: "Quicksand", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  margin-bottom: -20px;
-}
-
-.bar-image {
-  width: 80%;
-  max-width: 600px;
-  margin-left: 40px;
-  border-radius: 40px;
-}
 
 .slider-text {
   margin-top: -10px;
@@ -402,7 +421,7 @@ Map {
   }
 
   .popup {
-    padding-right: 1.2em;
+    padding-right: .5em;
   }
 
 }

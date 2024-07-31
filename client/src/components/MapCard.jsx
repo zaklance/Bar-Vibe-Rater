@@ -11,19 +11,19 @@ function MapCard({ bars }) {
                 <Map
                     defaultCenter={{ lat: 40.72606737678102, lng: -73.98333751481684 }}
                     defaultZoom={15}
-                    map-id='{import.meta.env.VITE_GOOGLE_MAP_ID}'
+                    mapId={import.meta.env.VITE_GOOGLE_MAP_ID}
                     disableDefaultUI={true}
                     >
                     {bars.map((barData) => (
                         <Marker key={barData.id} position={{'lat': parseFloat(barData.coordinates.lat), 'lng': parseFloat(barData.coordinates.lng)}} />
                     ))}
-                    {/* <AdvancedMarker position={tompkins}>
+                    <AdvancedMarker position={tompkins} content={'test'}>
                         <Pin
-                            background={'#0f9d58'}
-                            borderColor={'#006425'}
-                            glyphColor={'#60d98f'}
+                            // background={'#0f9d58'}
+                            // borderColor={'#006425'}
+                            // glyphColor={'#60d98f'}
                         />
-                    </AdvancedMarker> */}
+                    </AdvancedMarker>
                 </Map>
             </APIProvider>
         </div>

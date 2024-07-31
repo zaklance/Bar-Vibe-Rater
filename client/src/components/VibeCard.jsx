@@ -45,7 +45,6 @@ function VibeCard({ barData, favs, setFavs }) {
     
     useEffect(() => {
         setIsClicked(isFav)
-        console.log(window.scrollY)
     }, [handleClick])
 
     const handleExpand = () => {
@@ -77,6 +76,13 @@ function VibeCard({ barData, favs, setFavs }) {
                     <b>Hours:</b> {barData.hours}
                 </li>
             </ul>
+            <div className="review-box" >
+                <ul>
+                    {barData.ratings.map((rating) => (
+                        <li key={rating.id} ><b>{rating.user_id}:&emsp;</b>{rating.review}</li>
+                    ))}
+                </ul>
+            </div>
             <div className="float-right">
                 <button className="btn x-btn" onClick={handleExpand}>X</button>
             </div>
