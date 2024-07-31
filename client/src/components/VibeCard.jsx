@@ -9,7 +9,7 @@ function VibeCard({ barData, favs, setFavs }) {
     useEffect(() => {
 
         // Any other initialization or effect code can go here if needed
-    }, [barData]);    
+    }, [barData]);
 
     const handleClick = async (event) => {
         setIsClicked((isClick) => !isClick);
@@ -79,7 +79,7 @@ function VibeCard({ barData, favs, setFavs }) {
             <div className="review-box" >
                 <ul>
                     {barData.ratings.map((rating) => (
-                        <li key={rating.id} ><b>{rating.user_id}:&emsp;</b>{rating.review}</li>
+                        <li key={rating.id} ><b>{rating.users.username}:&emsp;</b>{rating.review}</li>
                     ))}
                 </ul>
             </div>

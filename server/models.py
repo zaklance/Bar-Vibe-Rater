@@ -27,6 +27,8 @@ class User(db.Model, SerializerMixin):
     _password = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
 
+    ratings = db.relationship('Rating', back_populates='users')
+
     serialize_rules = ('-ratings.users', '-favorites.users')
 
     @validates('username')
@@ -89,8 +91,9 @@ class Rating(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     bar = db.relationship('Bar', back_populates='ratings')
+    users = db.relationship('User', back_populates='ratings')
 
-    serialize_rules = ('-bar.ratings',)
+    serialize_rules = ('-bars.ratings', '-users.ratings', '-users.id', '-users._password', '-users.email', '-bar.favorites')
 
     def __repr__(self) -> str:
         return f"<Rating {self.rating}>"
@@ -105,4 +108,4 @@ class Favorite(db.Model, SerializerMixin):
 
     bar = db.relationship('Bar', back_populates='favorites')
 
-    serialize_rules = ('-bar.favorites',)
+    serialize_rules = ('-bars.favorites',)
