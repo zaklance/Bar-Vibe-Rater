@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { APIProvider, Map, Marker, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
 // import { Map, Marker } from 'mapkit-react'
+import MarkerCard from "./MarkerCard";
 
 function MapCard({ bars }) {
     const tompkins = { lat: 40.72606737678102, lng: -73.98333751481684 }
@@ -15,15 +16,9 @@ function MapCard({ bars }) {
                     disableDefaultUI={true}
                     >
                     {bars.map((barData) => (
-                        <Marker key={barData.id} position={{'lat': parseFloat(barData.coordinates.lat), 'lng': parseFloat(barData.coordinates.lng)}} />
-                    ))}
-                    <AdvancedMarker position={tompkins} content={'test'}>
-                        <Pin
-                            // background={'#0f9d58'}
-                            // borderColor={'#006425'}
-                            // glyphColor={'#60d98f'}
-                        />
-                    </AdvancedMarker>
+                        <MarkerCard key={barData.id} barData={barData} />
+                    ))}                        
+                    
                 </Map>
             </APIProvider>
         </div>

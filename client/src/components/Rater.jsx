@@ -6,9 +6,10 @@ import '../index.css';
 
 function Rater() {
     const chartRef = useRef();
-    const [bars, setBars] = useState([]);
-    const [query, setQuery] = useState("");
+    const [ bars, setBars ] = useState([]);
+    const [ query, setQuery ] = useState("");
     const [ sliderVibeList, setSliderVibeList ] = useState([4, 4, 4, 4, 4, 4, 4]);
+    const [ textContent , setTextContent ] = useState('')
     
     const theme = {
         1: 'Sports bar',
@@ -76,6 +77,10 @@ function Rater() {
 
     // const getIndex = (i) =>sliderVibeList[i]
 
+    const handleTextChange = (newValue) => {
+        setTextContent(newValue)
+    }
+
     const handleSliderChange = (index, newValue) => {
         const newValues = [...sliderVibeList];
         newValues[index] = newValue;
@@ -138,7 +143,6 @@ function Rater() {
         };
     }, [sliderVibeList]);
 
-
     function handleSubmit(event) {
         event.preventDefault();
         fetch("http://localhost:5555/ratings", {
@@ -151,9 +155,10 @@ function Rater() {
                 rating: sliderVibeList,
                 bar_id: matchingBarId,
                 user_id: globalThis.sessionStorage.getItem('user_id'),
+                review: textContent
             })
         }).then(response => response.json())
-            .then(console.log('Successful Vibe Rating'));
+            .then(console.log('Successful Vibe Rating')), alert('Rating Submitted')
     }
 
     return (
@@ -285,6 +290,8 @@ function Rater() {
                     value={sliderVibeList[6]}
                     onChange={(e, value) => handleSliderChange(6, value)}
                 />
+                <textarea type="text" className="text-box" value={textContent} placeholder="Describe the vibes..." onChange={(e, value) => setTextContent(e.target.value)} />
+                    <br/>
                 <input className="btn" id="submit" type="submit" value="Submit Vibe" />
             </form>
         </div>

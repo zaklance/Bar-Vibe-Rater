@@ -33,6 +33,7 @@ body {
   place-items: center;
   /* min-width: 320px; */
   min-height: 100vh;
+  /* background-image: linear-gradient(30deg, #ffd6ab, #ffd6bf); */
   background-color: #ffd6bf;
 }
 
@@ -197,6 +198,10 @@ ul {
   margin-bottom: 16px;
 }
 
+#submit {
+  margin: 6px 0 16px 0;
+}
+
 button {
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
 }
@@ -239,6 +244,25 @@ Map {
   -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
+.marker {
+  /* display: none; */
+  background-color: #d4d6fc;
+  padding: 4px;
+  border-style: solid;
+  border-color: #6c7ae0;
+  border-width: medium;
+  border-radius: 8px;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: #475094;
+  /* font-size: 1em; */
+}
+
+.marker-on {
+  display: block;
+}
+
 #chart-rater {
   justify-content: center;
   margin-top: -20px;
@@ -278,7 +302,8 @@ Map {
   width: 80%;
   max-width: 600px;
   height: fit-content;
-  background-color: #FFC08D;
+  background-image: linear-gradient(30deg, #FFC08D, #ffc378);
+  /* background-color: #FFC08D; */
   padding: 40px 0px 40px 0;
   z-index: 1002;
   overflow: auto;
@@ -345,6 +370,17 @@ Map {
 .slider {
   margin-bottom: -4px;
   /* margin-top: -10px; */
+}
+
+.text-box {
+  width: 99%;
+  max-width: 480px;
+  height: 5em;
+  border: none;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 1.1em;
 }
 
 .search-bar {

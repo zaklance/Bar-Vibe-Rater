@@ -91,6 +91,7 @@ def all_ratings():
                 rating=data.get('rating'),
                 bar_id=data.get('bar_id'),
                 user_id=data.get('user_id'),
+                review=data.get('review'),
                 # bar_name=data.get('bar_name')
             )
         except ValueError:
