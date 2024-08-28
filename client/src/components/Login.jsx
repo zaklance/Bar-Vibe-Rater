@@ -21,7 +21,7 @@ function Login() {
         });
         if (response.ok) {
             const data = await response.json();
-            globalThis.sessionStorage.setItem('authToken', 'is logged in');
+            globalThis.sessionStorage.setItem('jwt-token', data.token);
             globalThis.sessionStorage.setItem('user_id', data.id);
             console.log('Login successful:', data);
             navigate(`/vibes`);
